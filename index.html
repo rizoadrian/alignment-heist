@@ -827,9 +827,10 @@ function subscribe() {
 // RENDER DISPATCHER
 // ============================================================
 function render() {
-  if (isBoard)       renderBoard();
+  if (isBoard)         renderBoard();
+  else if (isSummary)  renderPDF();
   else if (isFacilitator) renderFacilitator();
-  else if (isVoter)  renderOperative();
+  else if (isVoter)    renderOperative();
 }
 
 // ============================================================
@@ -1216,14 +1217,11 @@ function openBoard() {
 }
 
 function goToSummary() {
-  hideAllViews();
-  showView('view-summary');
-  renderPDF();
+  window.open(location.pathname + '?view=summary', '_blank');
 }
 
 function goToFacilitator() {
-  hideAllViews();
-  showView('view-facilitator');
+  window.close();
 }
 
 // ============================================================

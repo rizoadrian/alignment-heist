@@ -527,7 +527,7 @@ body::before{
       <div style="display:flex;gap:.65rem;">
         <button class="btn btn-ghost" id="f-draw-btn" onclick="drawCard()">◆ Draw Card</button>
         <button class="btn btn-ghost" onclick="openBoard()">⬡ Board View</button>
-        <button class="btn btn-primary" id="f-export-btn" onclick="goToSummary()" style="display:none;">◆ Export PDF</button>
+        <button class="btn btn-primary" onclick="goToSummary()">◆ Export PDF</button>
       </div>
     </div>
   </div>
@@ -1013,7 +1013,6 @@ function renderFacilitator() {
   } else if (S.phase === 'done') {
     drawBtn.disabled = true;
     hide('f-commit');
-    el('f-export-btn').style.display = '';
     el('f-hint').textContent = 'All cards committed. Export PDF when ready.';
   }
 

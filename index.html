@@ -681,13 +681,13 @@ body::before{
 // FIREBASE CONFIG — paste your project's config here
 // ============================================================
 const FIREBASE_CONFIG = {
-  apiKey: "REPLACE_ME",
-  authDomain: "REPLACE_ME.firebaseapp.com",
-  databaseURL: "https://REPLACE_ME-default-rtdb.firebaseio.com",
-  projectId: "REPLACE_ME",
-  storageBucket: "REPLACE_ME.firebasestorage.app",
-  messagingSenderId: "REPLACE_ME",
-  appId: "REPLACE_ME"
+  apiKey: "AIzaSyDAidqymmE1FYFOYmyYPcpwyzdf-uXtoMU",
+  authDomain: "alignment-hesit.firebaseapp.com",
+  databaseURL: "https://alignment-hesit-default-rtdb.firebaseio.com",
+  projectId: "alignment-hesit",
+  storageBucket: "alignment-hesit.firebasestorage.app",
+  messagingSenderId: "975980809476",
+  appId: "1:975980809476:web:75f6cee004a1bf72881451"
 };
 
 // ============================================================
@@ -861,6 +861,14 @@ function renderOperative() {
     return;
   }
   if (S.phase === 'done') { show('op-done'); return; }
+
+  if (S.phase === 'committed' && S.deckPos === -1) {
+    // Session initialized but no card drawn yet — show lobby
+    show('op-lobby');
+    el('op-lc-code').textContent = myOp.code;
+    el('op-lc-name').textContent = myOp.name;
+    return;
+  }
 
   if (S.phase === 'committed') {
     show('op-committed');
@@ -1092,7 +1100,7 @@ function renderBoard() {
   const card   = CARD_MAP[cardId];
   const showTop = card && S.phase === 'drawn';
 
-  el('board-lobby-msg').style.display = S.phase === 'lobby' ? '' : 'none';
+  el('board-lobby-msg').style.display = (S.phase === 'lobby' || (S.phase === 'committed' && S.deckPos === -1)) ? '' : 'none';
   el('board-top').style.display = showTop ? 'grid' : 'none';
 
   if (showTop) {
